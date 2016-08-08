@@ -4,29 +4,27 @@ import signal
 import sys
 import node
 import MotionSensor
+import logging
 
-class MotionSensorObserver(node.MqttNode):
+class MotionSensorObserver():
     def __init__(self):
-        super().__init__("office/motion")
         signal.signal(signal.SIGINT, self.signal_handler)
         self.sensor = MotionSensor.MotionSensor(25)
+        self.node = node.MqttNode("office/motion")
         
     def signal_handler(self, signal, frame):
         sys.exit(0)
 
     def motionOn(self):
-        print("Motion detected")
-        super().publish("True")
+        logging.log("Motion detected")
+        self.node.publish("True")
 
     def motionOff(self):
-        print("Motion gone")
-        super().publish("False")
+        logging.log("Motion gone")
+        self.node.publish("False")
   
     def observe(self):
         self.sensor.start(self.motionOn, self.motionOff)
-
-   
-print('Pres CTRL+C to stop')
 
 observer = MotionSensorObserver()
 observer.observe()

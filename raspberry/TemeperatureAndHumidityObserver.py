@@ -1,10 +1,11 @@
+#!/usr/bin/env python
+
 import sys
 import Adafruit_DHT
-
 import signal
 import time 
-import datetime
 import node
+import logging
 
 class Observer():
     sensor = Adafruit_DHT.DHT11 #if not using DHT22, replace with Adafruit_DHT.DHT11 or Adafruit_DHT.AM2302
@@ -26,32 +27,30 @@ class Observer():
 
         if humidity is not None:
             if humidity == self.lastHumidity:
-                print("Humidity hasn't changed from {0:0.1f} %".format(humidity))
+                logging.log("Humidity no change {0:0.1f}%".format(humidity))
             else:
-                print("Humidity changed from {0:0.1f} % to {1:0.1f} %".format(self.lastHumidity, humidity))
+                logging.log("Humidity changed {0:0.1f}% - {1:0.1f}%".format(self.lastHumidity, humidity))
             self.humidNode.publish(humidity)
             self.lastHumidity = humidity
 
         else:
-            print("Failed to read humidity. Trying again")
+            logging.log("Failed to read humidity. Trying again")
 
         if temperature is not None:
             if temperature == self.lastTemperature:
-                print("Temperature hasn't changed from {0:0.1f} C".format(temperature))
+                logging.log("Temperature no change {0:0.1f} C".format(temperature))
             else:
-                print("Temperature changed from {0:0.1f} C to {1:0.1f} C".format(self.lastTemperature, temperature))
+                logging.log("Temperature changed {0:0.1f} C - {1:0.1f} C".format(self.lastTemperature, temperature))
             self.tempNode.publish(temperature)
             self.lastTemperature = temperature
 
         else:
-            print("Failed to read temperature. Trying again.")
+            logging.log("Failed to read temperature. Trying again.")
     
     def observe(self):
         while (True):
             self.readAndPublish()
             time.sleep(self.timerInMinutes*60)
-
-print('Pres CTRL+C to stop')
 
 observer = Observer()
 observer.observe()

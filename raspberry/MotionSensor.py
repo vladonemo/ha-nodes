@@ -27,4 +27,4 @@ class MotionSensor:
 				sent_falling = True
 				sent_rising = False
 				callback_falling()
-			time.sleep(0.5)
+			time.sleep(1)
