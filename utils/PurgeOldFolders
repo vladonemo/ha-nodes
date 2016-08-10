@@ -1,0 +1,3 @@
+#!/bin/bash
+
+find /home/pi/motion_output -type d -ctime +7 -exec rm -rf {} +

@@ -8,6 +8,6 @@ if [ -a /var/run/pigpio.pid ]
 fi
 
 (echo $BASHPID > /tmp/sensors_tah.pid
-sudo python /home/pi/ha-nodes/raspberry/TemeperatureAndHumidityObserver.py > /home/pi/ha-nodes/log/tah.log ) &
+sudo python /home/pi/ha-nodes/raspberry/TemeperatureAndHumidityObserver.py > /home/pi/log/sensors/tah.log ) &
 (echo $BASHPID > /tmp/sensors_m.pid
-sudo python3 /home/pi/ha-nodes/raspberry/MotionSensorObserver.py > /home/pi/ha-nodes/log/motion.log) &
+sudo python3 /home/pi/ha-nodes/raspberry/MotionSensorObserver.py > /home/pi/log/sensors/motion.log) &
