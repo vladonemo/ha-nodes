@@ -17,7 +17,7 @@ class MqttNode:
 
     def publish(self, message):
         self.client.reconnect()
-        self.client.publish(self.topic, message, qos=0)
+        self.client.publish(self.topic, message, qos=0, retain=True)
         self.client.disconnect()
 
     def on_connect(self, client, userdata, flags, rc):

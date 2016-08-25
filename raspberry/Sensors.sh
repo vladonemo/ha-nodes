@@ -7,6 +7,8 @@ if [ -a /var/run/pigpio.pid ]
     pigpiod
 fi
 
+mkdir -p /home/pi/log/sensors/
+
 (echo $BASHPID > /tmp/sensors_tah.pid
 sudo python /home/pi/ha-nodes/raspberry/TemeperatureAndHumidityObserver.py > /home/pi/log/sensors/tah.log ) &
 (echo $BASHPID > /tmp/sensors_m.pid
