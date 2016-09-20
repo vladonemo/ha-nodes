@@ -8,7 +8,7 @@ import node
 import logging
 
 class Observer():
-    sensor = Adafruit_DHT.DHT11 #if not using DHT22, replace with Adafruit_DHT.DHT11 or Adafruit_DHT.AM2302
+    sensor = Adafruit_DHT.DHT22 #if not using DHT22, replace with Adafruit_DHT.DHT11 or Adafruit_DHT.AM2302
     pinNum = 4  #if not using pin number 4, change here
     lastHumidity = 0
     lastTemperature = 0

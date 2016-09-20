@@ -9,7 +9,7 @@ import logging
 class MotionSensorObserver():
     def __init__(self):
         signal.signal(signal.SIGINT, self.signal_handler)
-        self.sensor = MotionSensor.MotionSensor(25)
+        self.sensor = MotionSensor.MotionSensor(22)
         self.node = node.MqttNode("office/motion")
         
     def signal_handler(self, signal, frame):
